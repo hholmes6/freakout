@@ -1,7 +1,7 @@
 'use client'
 
 import {useState, useEffect} from 'react';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import { getTeamClues } from "@/components/firebase"
 import { updateClue } from "@/components/firebase"
 import { getImageURL } from "@/components/firebase"
@@ -104,11 +104,15 @@ export default function DashboardViews(){
                 <AdminDashboard clues={clues} unit={unit} changeUnit={updateUnit} status={status}/>
             </>)}
 
-            {(!(isAdmin)) && (
+            {(isAdmin === false) && (
                 <PlayerDashboard clues={clues} updaterFunction={clueUpdater} team={team}/>
             )}
             
-            
+            {(isAdmin === undefined) && (
+                <div style={{display: 'flex'}}>
+                    <CircularProgress />
+                </div>
+            )}
         </>
     )
 }
