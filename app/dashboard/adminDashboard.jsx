@@ -19,17 +19,18 @@ import UnitForm from '@/components/unitForm';
 import styles from '../../components/dashboard.module.css';
 
 export default function AdminDashboard({clues, unit, changeUnit, status}){
-    let unitList = storageVar('activeUnits')
+    const [unitList, setUnitList] = useState()
     const [time, setTime] = useState(0)
     const [open, setOpen] = useState(false)
     const [areSure, setAreSure] = useState(false)
     const [override, setOverride] = useState(false)
     const [whichClue, setWhichClue] = useState()
     
-    function storageVar (item){
-        return JSON.parse(sessionStorage.getItem(item))
+    function storageVar (){
+        setUnitList(JSON.parse(sessionStorage.getItem('activeUnits')))
     }
 
+    useEffect(() => {storageVar()}, [])
     console.log(status)
     function iconDisplay(clue){
         if(clue.solved){
@@ -46,7 +47,7 @@ export default function AdminDashboard({clues, unit, changeUnit, status}){
     function formSubmit(){
         setOpen(!open)
         listActiveUnits().then((result) => {sessionStorage.setItem('activeUnits', JSON.stringify(result)); console.log(result)})
-        unitList = JSON.parse(sessionStorage.getItem('activeUnits'))
+        storageVar();
     }
 
     useEffect(() => console.log(clues))
