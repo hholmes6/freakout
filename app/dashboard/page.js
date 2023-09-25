@@ -42,7 +42,7 @@ export default function DashboardViews(){
         getTeamClues(unit, team, setClues)
     }, [])
     useEffect(() => {
-        console.log(clues)
+        console.log(isAdmin)
     })
     
     function updateUnit(newState){
