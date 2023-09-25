@@ -7,7 +7,7 @@ import QRCodeScanner from './qrScanner';
 
 export default function ClueData({clue, solveAttempt}){
     const [solve, setSolve] = useState(false)
-    const media = JSON.parse(sessionStorage?.getItem(`clue${clue.id}`))
+    const media = JSON.parse(sessionStorage.getItem(`clue${clue.id}`))
 
     
     useEffect(() => {console.log(clue)})

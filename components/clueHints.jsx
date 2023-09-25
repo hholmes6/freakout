@@ -22,12 +22,14 @@ export default function ClueHints ( {team}){
                                     })
     const [usedHints, setUsedHints] = useState({hint1: '', hint2: "", hint3: ""})
     const [openUsed, setOpenUsed] = useState(false)
-    let unit;
+    let unit = storageVar('unitName')
     //let unit = "testUnit1"
     
+    function storageVar (item){
+        return sessionStorage.getItem(item)
+    }
     useEffect(() => {
         getRemainingHints(unit, setRemainingHints)
-        unit = sessionStorage.getItem('unitName')
     }, [])
     
     function handleClick(key){

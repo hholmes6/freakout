@@ -19,16 +19,17 @@ import UnitForm from '@/components/unitForm';
 import styles from '../../components/dashboard.module.css';
 
 export default function AdminDashboard({clues, unit, changeUnit, status}){
-    let unitList;
+    let unitList = storageVar('activeUnits')
     const [time, setTime] = useState(0)
     const [open, setOpen] = useState(false)
     const [areSure, setAreSure] = useState(false)
     const [override, setOverride] = useState(false)
     const [whichClue, setWhichClue] = useState()
     
-    useEffect(() => {
-        unitList = JSON.parse(sessionStorage.getItem('activeUnits'))
-    }, [])
+    function storageVar (item){
+        return JSON.parse(sessionStorage.getItem(item))
+    }
+
     console.log(status)
     function iconDisplay(clue){
         if(clue.solved){

@@ -14,9 +14,9 @@ import PlayerDashboard from './playerDashboard';
 
 
 export default function DashboardViews(){
-    let isAdmin; 
-    let group;
-    let team; 
+    let isAdmin = storageVar('admin')
+    let group = storageVar('unitName') 
+    let team = storageVar('teamName') 
     //let isAdmin = true
     //let group = "testUnit1"
     //let team = "gold"
@@ -24,12 +24,12 @@ export default function DashboardViews(){
     const [status, setStatus] = useState()
     const [ clues, setClues] = useState()
 
+    function storageVar (item){
+        return sessionStorage.getItem(item)
+    }
+   
     useEffect(() => {
-        isAdmin = sessionStorage.getItem('admin') 
-        group = sessionStorage.getItem('unitName') 
-        team = sessionStorage.getItem('teamName')
-    }, [])
-    useEffect(() => {
+        
         if(isAdmin){
             getTeamClues(unit, "gold", updateAdminGold)
             getTeamClues(unit, "green", updateAdminGreen)

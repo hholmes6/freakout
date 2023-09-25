@@ -100,7 +100,7 @@ export default function Login(){
                     size="small"
                 >
                     <MenuItem value="select"> Select Unit</MenuItem>
-                    {unitList.length > 1 && ((unitList?.map((unit) => (
+                    {unitList.length > 0 && ((unitList?.map((unit) => (
                         <MenuItem key={unit} value={unit}>{unit}</MenuItem>
                     ))))}
                 </Select>
