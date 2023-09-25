@@ -21,5 +21,8 @@
     "react": "18.2.0",
     "react-canvas-confetti": "^1.4.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }
