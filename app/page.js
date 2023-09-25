@@ -1,95 +1,45 @@
+'use client'
+
+import {useState, useEffect} from 'react';
 import Image from 'next/image'
 import styles from './page.module.css'
+import freakoutwhite from '../public/freakoutwhite.png';
+import Link from 'next/link'
+import login from '../components/Login.png';
+import start from '../components/start.png';
+import { getAudion } from '@/components/firebase';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+
+export default function Home(){
+  const [enter, setEnter] = useState(false)
+  const [song, setSong] = useState()
+  getAudion(setSong)
+  
+  
+  function playAud() {
+    let aud = document.getElementById("playAudio")
+    aud.play();
+  }
+
+  if(!(enter)){
+    return(
+      <div className={styles.homepage}
+      >
+        <Image src={start} alt="Freak Out" className={styles.start} onClick={() => setEnter(!enter)}/>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+    )
+  }
+  if(enter){
+    setTimeout(playAud, 10)
+  return(
+      <div className={styles.homepage}>
+      <audio id="playAudio"  src={song} />
+      <Image src={freakoutwhite} alt="Freak Out" className={styles.homefreakout}/>
+      <div className={styles.loginLink}>
+        <Link href="/login">
+          <Image src={login} alt="Login" className={styles.loginImage} />
+        </Link>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  )}
 }
