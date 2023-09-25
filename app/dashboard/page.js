@@ -29,7 +29,9 @@ export default function DashboardViews(){
     }
    
     useEffect(() => {
-        
+        isAdmin = storageVar('admin')
+        group = storageVar('unitName') 
+        team = storageVar('teamName') 
         if(isAdmin){
             getTeamClues(unit, "gold", updateAdminGold)
             getTeamClues(unit, "green", updateAdminGreen)
