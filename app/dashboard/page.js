@@ -100,7 +100,7 @@ export default function DashboardViews(){
     
     return(
         <>
-            {isAdmin && (<>
+            {isAdmin === true && (<>
                 <AdminDashboard clues={clues} unit={unit} changeUnit={updateUnit} status={status}/>
             </>)}
 
