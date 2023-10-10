@@ -98,23 +98,17 @@ export default function DashboardViews(){
         })
     }
     
-    return(
-        <>
-            {isAdmin === true && (<>
-                <AdminDashboard clues={clues} unit={unit} changeUnit={updateUnit} status={status}/>
-            </>)}
-
-            {(isAdmin === false) && (
-                <PlayerDashboard clues={clues} updaterFunction={clueUpdater} team={team}/>
-            )}
-            
-            {(isAdmin === undefined) && (
-                <div style={{display: 'flex'}}>
-                    <CircularProgress />
-                </div>
-            )}
-        </>
-    )
+    if(!(isAdmin)){
+        return (
+            <PlayerDashboard clues={clues} updaterFunction={clueUpdater} team={team}/>
+        )
+    }
+    if((isAdmin)){
+        return(
+            <AdminDashboard clues={clues} unit={unit} changeUnit={updateUnit} status={status}/>
+        )
+    }
+    
 }
 
 
