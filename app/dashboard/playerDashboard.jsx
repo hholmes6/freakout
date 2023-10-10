@@ -65,7 +65,7 @@ export default function PlayerDashboard({updaterFunction, clues, team}){
         if(i === 4){
             const timeoutID = setTimeout(() => {
                 setFinished(true)
-                console.log("func ran")
+               //console.log("func ran")
             }, 1000)
             return () => {
                 clearTimeout(timeoutID)
@@ -73,7 +73,7 @@ export default function PlayerDashboard({updaterFunction, clues, team}){
         }
         const timeoutID = setTimeout(() => {
             setWoohoo(true)
-            console.log("func ran")
+            //console.log("func ran")
         }, 1000)
         return () => {
             clearTimeout(timeoutID)
@@ -85,7 +85,7 @@ export default function PlayerDashboard({updaterFunction, clues, team}){
         if(woohoo){
             const timeoutID = setTimeout(() => {
                 setWoohoo(false)
-                console.log("effect ran")
+                //console.log("effect ran")
             }, 6000)
             return () => {
                 clearTimeout(timeoutID)
@@ -122,7 +122,7 @@ export default function PlayerDashboard({updaterFunction, clues, team}){
         
         
     }
-    console.log(team)
+    //console.log(team)
 
     return(
         <div className={styles.teamdashboard}>

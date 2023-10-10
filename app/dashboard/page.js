@@ -17,9 +17,9 @@ export default function DashboardViews(){
     //let isAdmin = true
     //let group = "testUnit1"
     //let team = "gold"
-    const [team, setTeam] = useState()
-    const [group, setGroup] = useState()
-    const [isAdmin, setIsAdmin] = useState()
+    const [team, setTeam] = useState(String)
+    const [group, setGroup] = useState(String)
+    const [isAdmin, setIsAdmin] = useState(Boolean)
     const [unit, setUnit] = useState(group || "")
     const [status, setStatus] = useState()
     const [ clues, setClues] = useState()
