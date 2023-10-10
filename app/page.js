@@ -21,8 +21,7 @@ export default function Home(){
     aud.play();
   }
 
-  console.log("test update")
-
+  
   if(!(enter)){
     return(
       <div className={styles.homepage}
