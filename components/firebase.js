@@ -75,11 +75,11 @@ export function getGameStatus(unitName, callBack){
     }))
 }
 
-export function getTeamClues(unitName, team, callBack){
+export async function getTeamClues(unitName, team, callBack){
     const unitRef = ref(db, `localfreakout/active/${unitName}/${team}/clues`)
-    return onValue(unitRef, (snapshot) => {
-        const data = snapshot.val();
-        
+    return onValue(unitRef, async (snapshot) => {
+        const data = await snapshot.val();
+        console.log(data)
         callBack(data)
     })
 }

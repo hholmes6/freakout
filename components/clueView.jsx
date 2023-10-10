@@ -10,7 +10,7 @@ export default function ClueData({clue, solveAttempt}){
     const media = JSON.parse(sessionStorage.getItem(`clue${clue.id}`))
 
     
-    useEffect(() => {console.log(clue)})
+   useEffect(() => {console.log(clue)})
 
     
     if(clue.solved){

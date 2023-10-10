@@ -17,32 +17,32 @@ export default function DashboardViews(){
     //let isAdmin = true
     //let group = "testUnit1"
     //let team = "gold"
-    const [team, setTeam] = useState(String)
-    const [group, setGroup] = useState(String)
-    const [isAdmin, setIsAdmin] = useState(Boolean)
-    const [unit, setUnit] = useState(group || "")
+    const [team, setTeam] = useState()
+    const [isAdmin, setIsAdmin] = useState()
+    const [unit, setUnit] = useState()
     const [status, setStatus] = useState()
     const [ clues, setClues] = useState()
 
     function storageVar (){
         setTeam(sessionStorage.getItem('teamName'))
-        setGroup(sessionStorage.getItem('unitName'))
+        setUnit(sessionStorage.getItem('unitName'))
         setIsAdmin(sessionStorage.getItem('admin'))
     }
    
     useEffect(() => {
         storageVar(); 
-        if(isAdmin){
+        
+        if(isAdmin === "true"){
             getTeamClues(unit, "gold", updateAdminGold)
             getTeamClues(unit, "green", updateAdminGreen)
             getGameStatus(unit, getStatus)
             return
         }
-        getGameStatus(unit, getStatus)
-        getTeamClues(unit, team, setClues)
+        
+        console.log("first")
     }, [])
     useEffect(() => {
-        console.log(isAdmin)
+        console.log(clues)
     })
     
     function updateUnit(newState){
@@ -51,13 +51,14 @@ export default function DashboardViews(){
     }
 
     useEffect(() => {
-        if(isAdmin){
+        getGameStatus(unit, getStatus)
+        if(isAdmin === "true"){
             getTeamClues(unit, "gold", updateAdminGold)
             getTeamClues(unit, "green", updateAdminGreen)
-            getGameStatus(unit, getStatus)
-            
         } else {
-            getTeamClues(unit, team, fetchURLs)
+        getTeamClues(unit, team, setClues)
+        getTeamClues(unit, team, fetchURLs)   
+        console.log("second")
         }
     }, [unit, status])
 
@@ -87,7 +88,7 @@ export default function DashboardViews(){
         updateClue(unit, team, i, update)
     }
 
-    async function fetchURLs(array){
+    function fetchURLs(array){
         array.forEach(async (clue) => {
             const srcLinks = {
                 image: await getImageURL(clue).then((result) => {return result}),
@@ -98,16 +99,20 @@ export default function DashboardViews(){
         })
     }
     
-    if(!(isAdmin)){
-        return (
-            <PlayerDashboard clues={clues} updaterFunction={clueUpdater} team={team}/>
-        )
-    }
-    if((isAdmin)){
-        return(
+    
+    return(
+        <>
+        {isAdmin === "true" &&(
             <AdminDashboard clues={clues} unit={unit} changeUnit={updateUnit} status={status}/>
-        )
-    }
+        )}
+        {isAdmin === "false" && (
+            <PlayerDashboard clues={clues} updaterFunction={clueUpdater} team={team}/>
+        )}
+        {isAdmin === undefined && (
+            <CircularProgress />
+        )}
+        </>
+    )
     
 }
 
