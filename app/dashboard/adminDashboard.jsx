@@ -85,6 +85,9 @@ export default function AdminDashboard({clues, unit, changeUnit, status}){
         updateClue(unit, whichClue.team, whichClue.index, update)
         .then((response) => {console.log("clue marked solved"), setOverride(!override)})
         .catch((error) => console.log(error))
+        if(!clues[whichClue.team][whichClue.index].opened){
+            openClue()
+        }
     }
 
     function resetClue(){

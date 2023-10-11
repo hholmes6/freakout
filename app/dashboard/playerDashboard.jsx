@@ -51,6 +51,10 @@ export default function PlayerDashboard({updaterFunction, clues, team}){
             updaterFunction(i, update)
             setOpen(false)
             goodTimes()
+            if(!clues[i].opened){
+                let markOpen = {field: "opened", value: true}
+                updaterFunction(i, markOpen)
+            }
         }
         if(result === "psych"){
             setOpen(false)
